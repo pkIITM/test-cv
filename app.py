@@ -60,10 +60,22 @@ def view_submissions():
         cursor.execute('SELECT * FROM submissions')
         submissions = cursor.fetchall()
 
+    # Convert the submissions to a list of dictionaries
+    submissions_list = []
+    for submission in submissions:
+        submissions_list.append({
+            "id": submission[0],
+            "name": submission[1],
+            "age": submission[2],
+            "phone": submission[3],
+            "query": submission[4],
+            "email": submission[5]
+        })
+
     return jsonify({
-        "submissions": submissions
+        "submissions": submissions_list
     })
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)  # Disable debug mode in production

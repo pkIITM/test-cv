@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     displayFormData(formData);
 
     // Send the form data to the backend using Fetch API
-    fetch('https://test-cv-lm90.onrender.com/submit', {  // Updated fetch URL
+    fetch('https://test-cv-1.onrender.com/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
