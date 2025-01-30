@@ -21,8 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Display the form data on the webpage
     displayFormData(formData);
 
-    // Send the form data to the backend using Fetch API (optional)
-    fetch('http://127.0.0.1:5000/submit', {
+    // Send the form data to the backend using Fetch API
+    fetch('https://test-cv-lm90.onrender.com/submit', {  // Updated fetch URL
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
