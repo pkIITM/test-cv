@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     displayFormData(formData);
 
     // Send the form data to the backend using Fetch API (optional)
-    fetch('https://test-cv-0irk.onrender.com/submit', {
+    fetch('http://127.0.0.1:5000/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Error:', error);
         responseMessage.textContent = 'An error occurred. Please try again.';
       });
-  });https://test-cv-0irk.onrender.com
+  });
 
   // Function to display form data on the webpage
   function displayFormData(data) {
