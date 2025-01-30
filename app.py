@@ -1,19 +1,32 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import json  # Import the json module to work with JSON files
-import os  # Import the os module to handle file paths
+import sqlite3
+import os
 
-# Initialize the Flask app
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-# Path to the JSON file where data will be saved
-DATA_FILE = 'submissions.json'
+# Path to the SQLite database
+DATABASE = 'submissions.db'
 
-# Ensure the JSON file exists
-if not os.path.exists(DATA_FILE):
-    with open(DATA_FILE, 'w') as file:
-        json.dump([], file)  # Initialize with an empty list
+# Function to initialize the database
+def init_db():
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS submissions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                age INTEGER NOT NULL,
+                phone TEXT NOT NULL,
+                query TEXT NOT NULL,
+                email TEXT NOT NULL
+            )
+        ''')
+        conn.commit()
+
+# Initialize the database when the app starts
+init_db()
 
 # Route to handle form submissions
 @app.route('/submit', methods=['POST'])
@@ -24,16 +37,14 @@ def submit_form():
     # Log the received data to the console (for debugging)
     print("Received data:", data)
 
-    # Load existing data from the JSON file
-    with open(DATA_FILE, 'r') as file:
-        submissions = json.load(file)
-
-    # Add the new submission to the list
-    submissions.append(data)
-
-    # Save the updated list back to the JSON file
-    with open(DATA_FILE, 'w') as file:
-        json.dump(submissions, file, indent=4)  # Use indent for pretty formatting
+    # Save the data to the SQLite database
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO submissions (name, age, phone, query, email)
+            VALUES (?, ?, ?, ?, ?)
+        ''', (data['name'], data['age'], data['phone'], data['query'], data['email']))
+        conn.commit()
 
     # Send a success response back to the front-end
     return jsonify({
@@ -44,9 +55,10 @@ def submit_form():
 # Route to view all submissions (optional, for debugging)
 @app.route('/submissions', methods=['GET'])
 def view_submissions():
-    # Load data from the JSON file
-    with open(DATA_FILE, 'r') as file:
-        submissions = json.load(file)
+    with sqlite3.connect(DATABASE) as conn:
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM submissions')
+        submissions = cursor.fetchall()
 
     return jsonify({
         "submissions": submissions
