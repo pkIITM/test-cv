@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Suku",
+        "age": "22",
+        "phone": "7319390115",
+        "query": "I wannt to learn HTML CSS and JS",
+        "destination": "Warangal"
+    },
+    {
+        "name": "Ankita",
+        "age": "27",
+        "phone": "744646132146",
+        "query": "I want to learn Angular JS and Git and Git Hub",
+        "destination": "Bangalore"
+    },
+    {
+        "name": "Sikriti",
+        "age": "25",
+        "phone": "7319390115",
+        "query": "i want to learn facebook",
+        "destination": "hyd"
+    },
+    {
+        "name": "Himanshu",
+        "age": "28",
+        "phone": "76876431",
+        "query": "hkiu",
+        "destination": "klh "
+    },
+    {
+        "name": "wkjggsexy",
+        "age": "67",
+        "phone": "t889",
+        "query": "h,jh",
+        "email": "y89"
+    },
+    {
+        "name": "Amrita",
+        "age": "7",
+        "phone": "45766",
+        "query": "okk",
+        "email": "pk.iitm@@hjkh"
+    },
+    {
+        "name": "Anonymous",
+        "age": "1000",
+        "phone": "00000000000",
+        "query": "testing contact me on cv 2.0 ",
+        "email": "cv2.0 "
+    }
+]
